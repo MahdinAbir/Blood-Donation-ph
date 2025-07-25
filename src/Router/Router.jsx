@@ -4,6 +4,7 @@ import {
 } from "react-router";
 import App from "../App";
 import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 const Router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "/auth/register",
-    element: <Login></Login>
+    element: <Register></Register>
   },
 
 
