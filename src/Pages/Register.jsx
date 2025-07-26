@@ -6,6 +6,7 @@ import districts from '../assets/districts.json';
 import upazilas from '../assets/upazilas.json';
 
 import { AuthContext } from '../Authentication/AuthContext';
+import axios from 'axios';
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
@@ -96,7 +97,9 @@ const Register = () => {
       //   body: JSON.stringify(userData)
       // });
 
-      
+      axios.post( 'http://localhost:3000/AllUsers',
+       {userData}
+      ).then( (res)=>{console.log(res)}).catch((err) =>{toast.error(err)} )
 
 
 
@@ -112,10 +115,10 @@ const Register = () => {
   if (user) return <p className="text-center py-10 text-xl text-green-600">You're already logged in.</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFFDEC] px-4">
-      <div className="flex flex-col lg:flex-row w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-[#EAEBD0] px-4">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden mt-20 ">
         {/* Left Side */}
-        <div className="w-full lg:w-1/2 bg-[#FFE8CD] flex flex-col items-center justify-center p-10">
+        <div className="w-full lg:w-1/2 bg-[#FFF2EB] flex flex-col items-center justify-center  p-10">
           <h2 className="text-3xl font-bold text-[#AF3E3E] mb-2">Sign Up & Save Lives!</h2>
           <p className="text-[#511D43] text-center max-w-xs">
             Register to donate blood, help others, and spread kindness.

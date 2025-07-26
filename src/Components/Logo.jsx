@@ -7,7 +7,7 @@ const Logo = () => {
       <div className="relative w-full">
         {/* Default Image */}
         <img
-          src="https://i.ibb.co/s9zC0Kh1/Adobe-Express-file-1.png"
+          src="https://i.ibb.co/ks2XCj5z/Picsart-25-07-26-18-23-56-527.png"
           alt="Logo"
           className="w-full transition-opacity duration-300 group-hover:opacity-0"
         />

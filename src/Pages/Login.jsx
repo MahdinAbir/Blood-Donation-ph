@@ -15,7 +15,7 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from || '/';
 
-  const { logIn, LoginGoogle, user } = useContext(AuthContext);
+  const { logIn, user } = useContext(AuthContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,18 +35,7 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      await LoginGoogle();
-      toast.success('Logged in successfully', {
-        position: 'top-center',
-        autoClose: 1200,
-        onClose: () => navigate(from, { replace: true }),
-      });
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+ 
 
   const handleForgetPass = () => {
     const currentEmail = emailRef.current?.value || '';
@@ -117,15 +106,7 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="my-4">
-            <button
-              onClick={handleGoogleLogin}
-              className="bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold flex items-center justify-center gap-2 py-2 rounded-md"
-            >
-              <img className="w-5 h-5" src="https://i.ibb.co/gFM2v5M2/google.png" alt="google" />
-              Login with Google
-            </button>
-          </div>
+          
 
           <p className="mt-6 text-center text-gray-600 text-sm">
             Don’t have an account?{' '}
