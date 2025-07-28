@@ -13,7 +13,10 @@ const GlassNavbar = () => {
   };
 
   const linkHoverStyle =
-    'px-4 py-2 rounded-md hover:bg-white/10 hover:backdrop-blur-[3px] transition';
+    'px-4 py-2 text-[#6B2C2C] text-xl font-bold  rounded-md hover:bg-white/10 hover:backdrop-blur-[3px] transition';
+  const linkHoverStyle2 =
+  'px-4 w-full py-3 text-[#6B2C2C] text-xl font-bold rounded-md hover:bg-[#FFE6E6] hover:backdrop-blur-[3px] transition duration-300 hover:shadow-md block ';
+
 
   const NavItems = () => (
     <>
@@ -43,13 +46,13 @@ const GlassNavbar = () => {
         <div className="flex gap-4">
           <NavLink
             to="/auth/login"
-            className="bg-green-500 text-white px-4 py-1.5 rounded-md hover:bg-green-600 transition"
+            className="bg-[#CD5656]  text-white px-4 py-1.5 rounded-md hover:bg-green-600 transition"
           >
             Login
           </NavLink>
           <NavLink
             to="/auth/register"
-            className="bg-pink-500 text-white px-4 py-1.5 rounded-md hover:bg-pink-600 transition"
+            className="bg-[#AF3E3E] text-white px-4 py-1.5 rounded-md hover:bg-pink-600 transition"
           >
             Sign Up
           </NavLink>
@@ -63,18 +66,18 @@ const GlassNavbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="mt-3 z-[9] p-2 shadow menu menu-sm dropdown-content bg-white text-black rounded-box w-52"
+            className="mt-3 z-[9] p-2 shadow menu menu-sm dropdown-content bg-[white] text-[#6B2C2C] rounded-box w-52"
           >
-            {NavItems()}
+            
             <li>
-              <NavLink to="/dashboard" className="px-4 py-2 rounded-md hover:bg-black/10 transition">
+              <NavLink to="/dashboard" className="px-4 py-2 rounded-md hover:bg-black/20 transition">
                 Dashboard
               </NavLink>
             </li>
             <li>
               <button
                 onClick={handleLogout}
-                className="w-full text-left border border-red-500 text-red-500 px-4 py-1.5 rounded-md hover:bg-red-500 hover:text-white transition"
+                className="w-full text-center border border-red-500 text-red-500 px-4 py-1.5 rounded-md hover:bg-red-500 hover:text-white transition"
               >
                 Logout
               </button>
@@ -123,21 +126,21 @@ const GlassNavbar = () => {
 
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
-        <div className="md:hidden absolute top-[20vh] left-1/2 transform -translate-x-1/2 w-[90%] bg-white/10 backdrop-blur-[25px] border border-white/20 rounded-lg p-4 z-20 text-white">
+        <div className="md:hidden absolute top-[20vh] left-1/2 transform -translate-x-1/2 w-[90%] bg-white text-xl font-bold backdrop-blur-[25px]  border border-white/20 rounded-lg p-4 z-20 text-[#6B2C2C]">
           <ul className="flex flex-col gap-4 text-center">
             <li>
-              <NavLink to="/donations" className={linkHoverStyle}>
+              <NavLink to="/donations" className={linkHoverStyle2}>
                 Donation Requests
               </NavLink>
             </li>
             <li>
-              <NavLink to="/blog" className={linkHoverStyle}>
+              <NavLink to="/blog" className={linkHoverStyle2}>
                 Blog
               </NavLink>
             </li>
             {user && (
               <li>
-                <NavLink to="/funding" className={linkHoverStyle}>
+                <NavLink to="/funding" className={linkHoverStyle2}>
                   Funding
                 </NavLink>
               </li>
@@ -166,7 +169,7 @@ const GlassNavbar = () => {
                 <li>
                   <NavLink
                     to="/dashboard"
-                    className="block px-4 py-2 rounded-md hover:bg-white/10 transition"
+                    className={linkHoverStyle2}
                   >
                     Dashboard
                   </NavLink>

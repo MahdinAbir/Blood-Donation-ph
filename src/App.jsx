@@ -2,7 +2,7 @@
 import { Outlet } from 'react-router'
 import './App.css'
 import GlassNavbar from './Components/GlassNavbar'
-import Body from './Components/Body'
+import Body from './Components/Home'
 import Footer from './Components/Footer'
 
 function App() {
