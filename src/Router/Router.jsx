@@ -14,6 +14,9 @@ import Admin from "../DashBoardLayout/Admin";
 import BloodReq from "../Donor/BloodReq";
 import DonorHome from "../Donor/DonorHome";
 import CreateReq from "../Donor/CreateReq";
+import Profile from "../DashBoardLayout/Profile";
+import DonorDetails from "../Donor/DonorDetails";
+import DonorEdit from "../Donor/DonorEdit";
 
 const Router = createBrowserRouter([
   {
@@ -75,6 +78,18 @@ element:<BloodReq></BloodReq>
       {
 path:"/dashboard/donor/create-donation-request",
 element:<CreateReq></CreateReq>
+      },
+      {
+path:"/dashboard/donor/profile",
+element:<Profile></Profile>
+      },
+      {
+path:"/dashboard/donor/view/:id",
+element:<DonorDetails></DonorDetails>
+      },
+      {
+path:"/dashboard/donor/edit/:id",
+element:<DonorEdit></DonorEdit>
       },
 
     ]

@@ -90,12 +90,7 @@ const Register = () => {
 
       console.log("User Data to send to MongoDB:", userData);
 
-      // ✅ OPTIONAL: Send to your MongoDB backend
-      // await fetch('https://your-backend.com/api/users', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(userData)
-      // });
+     
 
       axios.post( 'http://localhost:3000/AllUsers',
        {userData}

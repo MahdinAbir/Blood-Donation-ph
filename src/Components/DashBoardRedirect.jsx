@@ -36,13 +36,13 @@ console.log(role);
         } else if (role === "Donor") {
           navigate("/dashboard/donor");
         } else {
-          // Unexpected role — redirect to unauthorized or error page
-          navigate("/unauthorized"); // or create a fallback page
+          
+          navigate("/unauthorized"); 
         }
 
       } catch (err) {
         console.error("Error verifying user or fetching role:", err);
-        navigate("/unauthorized"); // server error or invalid token
+        navigate("/unauthorized"); 
       } finally {
         setRoleLoading(false);
       }
