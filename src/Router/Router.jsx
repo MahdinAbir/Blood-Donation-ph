@@ -19,8 +19,9 @@ import Profile from "../DashBoardLayout/Profile";
 
 import AllUsers from "../Admin/AllUsers";
 import AdminHome from "../Admin/AdminHome";
-import Details from "../Donor/Details";
-import Edit from "../Donor/Edit";
+import Details from "../DashBoardLayout/Details";
+import Edit from "../DashBoardLayout/Edit";
+import AllReq from "../DashBoardLayout/AllReq";
 
 
 const Router = createBrowserRouter([
@@ -129,7 +130,7 @@ element:<CreateReq></CreateReq>
       },
 {
 path:"/dashboard/Admin/my-donation-requests",
-element:<BloodReq></BloodReq>
+element:<AllReq></AllReq>
       },
 {
 path:"/dashboard/Admin/profile",
