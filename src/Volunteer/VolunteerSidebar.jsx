@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router';
 import { AuthContext } from '../Authentication/AuthContext';
 import { Menu, X } from 'lucide-react'; // hamburger icons
 
-const AdminSidebar = () => {
+const VolunteerSidebar = () => {
   const { user, mainProfileData } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   console.log(mainProfileData)
@@ -17,11 +17,12 @@ const AdminSidebar = () => {
 
   // Centralized navigation items
   const navItems = [
-    { to: '/dashboard/Admin', label: '🏠 Dashboard Home', end: true },
-    { to: '/dashboard/Admin/Allusers', label: ' All Users' },
-    { to: '/dashboard/Admin/create-donation-request', label: '➕ Create Request' },
-    { to: '/dashboard/Admin/All-donation-requests', label: '📄 All Requests' },
-    { to: '/dashboard/Admin/profile', label: '👤 My Profile' },
+    { to: '/dashboard/Volunteer', label: '🏠 Dashboard Home', end: true },
+    
+    { to: '/dashboard/Volunteer/create-donation-request', label: '➕ Create Request' },
+    { to: '/dashboard/Volunteer/All-donation-requests', label: '📄 All Requests' },
+    { to: '/dashboard/Volunteer/Content-Management', label: ' Content Management' },
+    { to: '/dashboard/Volunteer/profile', label: '👤 My Profile' },
   ];
 
   return (
@@ -83,4 +84,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default VolunteerSidebar;

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 import { HiDotsVertical, HiOutlineAdjustments } from 'react-icons/hi';
+import { AuthContext } from '../Authentication/AuthContext';
 
 const AllReq = () => {
   const [allRequests, setAllRequests] = useState([]);
@@ -12,6 +13,8 @@ const AllReq = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const navigate = useNavigate();
+  const { mainProfileData } = useContext(AuthContext);
+  console.log(mainProfileData);
 
   useEffect(() => {
     const fetchAllRequests = async () => {
@@ -36,13 +39,11 @@ const AllReq = () => {
     setCurrentPage(1);
   }, [filterStatus, allRequests]);
 
-  // Pagination Logic
   const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredRequests.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Delete function
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: 'Are you sure?',
@@ -66,7 +67,6 @@ const AllReq = () => {
     }
   };
 
-  // Status update function (already existing)
   const handleStatusUpdate = async (id, newStatus) => {
     try {
       await axios.patch(`http://localhost:3000/Recipients/${id}`, { donationStatus: newStatus });
@@ -80,11 +80,9 @@ const AllReq = () => {
     }
   };
 
-  // Actions Dropdown
   const ActionsMenu = ({ req }) => {
     const [open, setOpen] = useState(false);
 
-    // Close dropdown if clicked outside
     useEffect(() => {
       const handleClickOutside = () => setOpen(false);
       if (open) window.addEventListener('click', handleClickOutside);
@@ -143,22 +141,17 @@ const AllReq = () => {
     );
   };
 
-  // Status Dropdown
   const StatusMenu = ({ req }) => {
     const [open, setOpen] = useState(false);
 
-    // Possible statuses:
     const statuses = ['pending', 'inprogress', 'done', 'canceled'];
 
-    // Filter out current status (and optionally others as needed)
     const availableStatuses = statuses.filter(
       status =>
         status !== req.donationStatus &&
-        // If current status is 'done', no status changes allowed
         (req.donationStatus !== 'done' || status === req.donationStatus)
     );
 
-    // Close dropdown if clicked outside
     useEffect(() => {
       const handleClickOutside = () => setOpen(false);
       if (open) window.addEventListener('click', handleClickOutside);
@@ -210,7 +203,6 @@ const AllReq = () => {
     <div className="p-4 md:p-6 bg-[#EAEBD0] min-h-screen">
       <h2 className="text-2xl font-bold mb-4">📋 All Donation Requests</h2>
 
-      {/* Filter Buttons */}
       <div className="flex flex-wrap gap-3 mb-4">
         {['all', 'pending', 'inprogress', 'done', 'canceled'].map(status => (
           <button
@@ -227,7 +219,6 @@ const AllReq = () => {
         ))}
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto bg-white rounded-xl shadow-md">
         <table className="w-full table-auto text-sm md:text-base">
           <thead className="bg-[#DA6C6C] text-white">
@@ -237,16 +228,19 @@ const AllReq = () => {
               <th className="p-3">Location</th>
               <th className="p-3">Hospital</th>
               <th className="p-3">Blood Group</th>
-              <th className="p-3">Date & Time</th>
+              <th className="p-3">Date &amp; Time</th>
               <th className="p-3">Status</th>
-              <th className="p-3 text-center">Actions</th>
+              {/* Only show Actions header if Admin */}
+              {mainProfileData?.role === 'Admin' && (
+                <th className="p-3 text-center">Actions</th>
+              )}
               <th className="p-3 text-center">Change Status</th>
             </tr>
           </thead>
           <tbody>
             {currentItems.length === 0 ? (
               <tr>
-                <td colSpan="9" className="text-center py-6 text-gray-500">
+                <td colSpan={mainProfileData?.role === 'Admin' ? 9 : 8} className="text-center py-6 text-gray-500">
                   No donation requests found.
                 </td>
               </tr>
@@ -259,9 +253,7 @@ const AllReq = () => {
                     {req.recipientDistrict}, {req.recipientUpazila}
                   </td>
                   <td className="p-3">{req.hospitalName}</td>
-                  <td className="p-3 font-semibold text-[#AF3E3E]">
-                    {req.bloodGroup}
-                  </td>
+                  <td className="p-3 font-semibold text-[#AF3E3E]">{req.bloodGroup}</td>
                   <td className="p-3">
                     {req.donationDate} at {req.donationTime}
                   </td>
@@ -280,9 +272,14 @@ const AllReq = () => {
                       {req.donationStatus}
                     </span>
                   </td>
-                  <td className="p-3 text-center">
-                    <ActionsMenu req={req} />
-                  </td>
+
+                  
+                  {mainProfileData?.role === 'Admin' && (
+                    <td className="p-3 text-center">
+                      <ActionsMenu req={req} />
+                    </td>
+                  )}
+
                   <td className="p-3 text-center">
                     <StatusMenu req={req} />
                   </td>
@@ -293,7 +290,6 @@ const AllReq = () => {
         </table>
       </div>
 
-      {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex justify-center mt-6 gap-2">
           {Array.from({ length: totalPages }, (_, idx) => (

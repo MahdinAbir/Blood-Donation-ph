@@ -3,14 +3,25 @@ import axios from "axios";
 import { getIdToken } from "firebase/auth";
 import { AuthContext } from "../Authentication/AuthContext";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 const Details = () => {
-    const {id}= useParams();
+  const { id } = useParams();
   const { user } = useContext(AuthContext);
   const [donor, setDonor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(id)
+  const [showModal, setShowModal] = useState(false);
+
+  const handleStatusUpdate = async (id, newStatus) => {
+    try {
+      await axios.patch(`http://localhost:3000/Recipients/${id}`, { donationStatus: newStatus });
+      toast.success("Status Updated!");
+    } catch (err) {
+      toast.error("NOT UPDATED");
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     if (!user) return;
@@ -100,6 +111,65 @@ const Details = () => {
           value={new Date(donor.createdAt).toLocaleString()}
         />
       </div>
+
+      {donor.donationStatus === "pending" && (
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setShowModal(true)}
+            className="px-6 py-2 bg-[#AF3E3E] text-white font-semibold rounded-lg hover:bg-red-700 transition"
+          >
+            Donate
+          </button>
+        </div>
+      )}
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h3 className="text-xl font-bold mb-4 text-[#AF3E3E]">
+              Confirm Donation
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-gray-600">Donor Name</label>
+                <input
+                  type="text"
+                  value={user.displayName || ""}
+                  readOnly
+                  className="w-full border px-3 py-2 rounded-md bg-gray-100"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-600">Donor Email</label>
+                <input
+                  type="email"
+                  value={user.email || ""}
+                  readOnly
+                  className="w-full border px-3 py-2 rounded-md bg-gray-100"
+                />
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end gap-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  await handleStatusUpdate(donor._id, "inprogress");
+                  setDonor({ ...donor, donationStatus: "inprogress" });
+                  setShowModal(false);
+                }}
+                className="px-4 py-2 bg-[#AF3E3E] text-white rounded hover:bg-red-700"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

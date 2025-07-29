@@ -21,7 +21,7 @@ const GlassNavbar = () => {
   const NavItems = () => (
     <>
       <li>
-        <NavLink to="/donations" className={linkHoverStyle}>
+        <NavLink to="/auth/donations" className={linkHoverStyle}>
           Donation Requests
         </NavLink>
       </li>
@@ -129,7 +129,7 @@ const GlassNavbar = () => {
         <div className="md:hidden absolute top-[20vh] left-1/2 transform -translate-x-1/2 w-[90%] bg-white text-xl font-bold backdrop-blur-[25px]  border border-white/20 rounded-lg p-4 z-20 text-[#6B2C2C]">
           <ul className="flex flex-col gap-4 text-center">
             <li>
-              <NavLink to="/donations" className={linkHoverStyle2}>
+              <NavLink to="/auth/donations" className={linkHoverStyle2}>
                 Donation Requests
               </NavLink>
             </li>

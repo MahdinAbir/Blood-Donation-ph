@@ -33,7 +33,7 @@ console.log(role);
         if (role === "Admin") {
           navigate("/dashboard/admin");
         } else if (role === "Volunteer") {
-          navigate("/dashboard/volunteer");
+          navigate("/dashboard/Volunteer");
         } else if (role === "Donor") {
           navigate("/dashboard/donor");
         } else {

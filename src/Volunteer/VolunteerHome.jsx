@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { getIdToken } from "firebase/auth";
 
-const AdminHome = () => {
+const VolunteerHome = () => {
   const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -145,4 +145,4 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default VolunteerHome;

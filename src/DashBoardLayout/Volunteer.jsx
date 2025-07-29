@@ -1,13 +1,14 @@
 import { Outlet } from "react-router";
 import DonorSidebar from "../Donor/DonorSidebar";
 import Topbar from "./Topbar";
+import VolunteerSidebar from "../Volunteer/VolunteerSidebar";
 
 
 const Volunteer = () => {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <DonorSidebar></DonorSidebar>
+      <VolunteerSidebar></VolunteerSidebar>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">

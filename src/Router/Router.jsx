@@ -22,6 +22,9 @@ import AdminHome from "../Admin/AdminHome";
 import Details from "../DashBoardLayout/Details";
 import Edit from "../DashBoardLayout/Edit";
 import AllReq from "../DashBoardLayout/AllReq";
+import DashboardStats from "../DashBoardLayout/DashBoardStats";
+import VolunteerHome from "../Volunteer/VolunteerHome";
+import PendingRequests from "../Components/PendingRequests";
 
 
 const Router = createBrowserRouter([
@@ -48,6 +51,10 @@ const Router = createBrowserRouter([
   {
     path: "/auth/register",
     element: <Register></Register>
+  },
+  {
+    path: "/auth/donations",
+    element: <PendingRequests></PendingRequests>
   },
 
 
@@ -103,8 +110,41 @@ element:<Edit></Edit>
     ]
   },
   {
-    path: "/dashboard/volunteer",
-    element: <Volunteer></Volunteer>
+    path: "/dashboard/Volunteer",
+    element: <Volunteer></Volunteer>,
+
+children: [
+
+      {
+index:true,
+path:"/dashboard/Volunteer",
+element:<div>  <DashboardStats></DashboardStats>
+<VolunteerHome></VolunteerHome>
+
+     </div>
+
+
+      },
+      {
+path:"/dashboard/Volunteer/All-donation-requests",
+element:<AllReq></AllReq>
+      },
+      {
+path:"/dashboard/Volunteer/create-donation-request",
+element:<CreateReq></CreateReq>
+      },
+      {
+path:"/dashboard/Volunteer/profile",
+element:<Profile></Profile>
+      },
+
+
+    
+    
+    ]
+
+
+
   },
   
   {
@@ -116,7 +156,11 @@ element:<Edit></Edit>
 {
   index:true,
   path:"/dashboard/Admin",
-  element: <AdminHome></AdminHome>
+  element: <div>  
+    <DashboardStats></DashboardStats>
+    
+     <AdminHome></AdminHome>
+    </div>
 
 },
 {
@@ -129,7 +173,7 @@ path:"/dashboard/Admin/create-donation-request",
 element:<CreateReq></CreateReq>
       },
 {
-path:"/dashboard/Admin/my-donation-requests",
+path:"/dashboard/Admin/All-donation-requests",
 element:<AllReq></AllReq>
       },
 {

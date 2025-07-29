@@ -20,7 +20,7 @@ const DonorSidebar = () => {
     { to: '/dashboard/donor', label: '🏠 Dashboard Home', end: true },
     { to: '/dashboard/donor/create-donation-request', label: '➕ Create Request' },
     { to: '/dashboard/donor/my-donation-requests', label: '📄 My Requests' },
-    { to: '/dashboard/donor/profile', label: 'My Profile' },
+    { to: '/dashboard/donor/profile', label: '👤  My Profile' },
   ];
 
   return (
