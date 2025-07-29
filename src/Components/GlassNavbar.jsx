@@ -26,13 +26,13 @@ const GlassNavbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/blog" className={linkHoverStyle}>
+        <NavLink to="/auth/blog" className={linkHoverStyle}>
           Blog
         </NavLink>
       </li>
       {user && (
         <li>
-          <NavLink to="/funding" className={linkHoverStyle}>
+          <NavLink to="/auth/fund" className={linkHoverStyle}>
             Funding
           </NavLink>
         </li>
@@ -134,13 +134,13 @@ const GlassNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/blog" className={linkHoverStyle2}>
+              <NavLink to="/auth/blog" className={linkHoverStyle2}>
                 Blog
               </NavLink>
             </li>
             {user && (
               <li>
-                <NavLink to="/funding" className={linkHoverStyle2}>
+                <NavLink to="/auth/fund" className={linkHoverStyle2}>
                   Funding
                 </NavLink>
               </li>

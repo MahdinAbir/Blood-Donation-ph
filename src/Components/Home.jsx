@@ -22,12 +22,12 @@ const Home = () => {
             Your single donation can save up to three lives. Join our mission to bring hope and health to those in need.
           </p>
           <div className="space-x-4">
-            <Link to="/register" className="btn bg-[#DA6C6C] hover:bg-[#CD5656] border-none text-white font-semibold">
+            <Link to="/auth/register" className="btn bg-[#DA6C6C] hover:bg-[#CD5656] border-none text-white font-semibold">
               Join as a Donor
             </Link>
-            <Link to="/search" className="btn bg-white hover:bg-[#FFD6BA] border border-[#CD5656] text-[#AF3E3E] font-semibold">
+            {/* <Link to="/search" className="btn bg-white hover:bg-[#FFD6BA] border border-[#CD5656] text-[#AF3E3E] font-semibold">
               Search Donors
-            </Link>
+            </Link> */}
           </div>
         </motion.div>
 
@@ -39,7 +39,7 @@ const Home = () => {
           className="flex-1"
         >
           <div className="w-full md:max-w-md max-w-sm h-64 bg-gray-300 rounded-xl mx-auto flex items-center justify-center">
-            <p className="text-gray-600 text-center">[ Banner Image Here ]</p>
+            <p className="text-gray-600 text-center"> <img src="https://i.ibb.co/7xhQ0xD2/premium-photo-1682309704250-6bac0f499665-w-600-auto-format-fit-crop-q-60-ixlib-rb-4-1.jpg" alt="" /> </p>
           </div>
         </motion.div>
       </section>

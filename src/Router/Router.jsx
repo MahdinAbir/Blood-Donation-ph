@@ -25,6 +25,10 @@ import AllReq from "../DashBoardLayout/AllReq";
 import DashboardStats from "../DashBoardLayout/DashBoardStats";
 import VolunteerHome from "../Volunteer/VolunteerHome";
 import PendingRequests from "../Components/PendingRequests";
+import PrivateRoute from "./PrivateRoute";
+import Blog from "../Components/Blog";
+import Fund from "../Components/Fund";
+import Error from "../Pages/Error";
 
 
 const Router = createBrowserRouter([
@@ -56,6 +60,14 @@ const Router = createBrowserRouter([
     path: "/auth/donations",
     element: <PendingRequests></PendingRequests>
   },
+  {
+    path: "/auth/blog",
+    element: <Blog></Blog>
+  },
+  {
+    path: "/auth/fund",
+    element: <PrivateRoute> <Fund></Fund> </PrivateRoute>
+  },
 
 
 
@@ -66,133 +78,109 @@ const Router = createBrowserRouter([
   
   {
     path: "/dashboard",
-    element: <DashboardRedirect></DashboardRedirect>
+    element: <PrivateRoute>   <DashboardRedirect></DashboardRedirect>  </PrivateRoute>
+    
   },
   {
     path: "/unauthorized",
     element: <Unauthorized></Unauthorized>
   },
   {
-    path: "/dashboard/donor",
-    element: <Donor></Donor>,
-    children: [
-
-      {
-index:true,
-path:"/dashboard/donor",
-element:<DonorHome></DonorHome>
-
-
-      },
-
-      {
-path:"/dashboard/donor/create-donation-request",
-element:<CreateReq></CreateReq>
-      },
-      {
-path:"/dashboard/donor/my-donation-requests",
-element:<BloodReq></BloodReq>
-      },
-      
-      {
-path:"/dashboard/donor/profile",
-element:<Profile></Profile>
-      },
-      {
-path:"/dashboard/donor/view/:id",
-element:<Details></Details>
-      },
-      {
-path:"/dashboard/donor/edit/:id",
-element:<Edit></Edit>
-      },
-
-    ]
-  },
-  {
-    path: "/dashboard/Volunteer",
-    element: <Volunteer></Volunteer>,
-
-children: [
-
-      {
-index:true,
-path:"/dashboard/Volunteer",
-element:<div>  <DashboardStats></DashboardStats>
-<VolunteerHome></VolunteerHome>
-
-     </div>
-
-
-      },
-      {
-path:"/dashboard/Volunteer/All-donation-requests",
-element:<AllReq></AllReq>
-      },
-      {
-path:"/dashboard/Volunteer/create-donation-request",
-element:<CreateReq></CreateReq>
-      },
-      {
-path:"/dashboard/Volunteer/profile",
-element:<Profile></Profile>
-      },
-
-
-    
-    
-    ]
-
-
-
-  },
-  
-  {
-    path: "/dashboard/Admin",
-    element: <Admin></Admin>,
-    children: [
-
-
-{
-  index:true,
-  path:"/dashboard/Admin",
-  element: <div>  
-    <DashboardStats></DashboardStats>
-    
-     <AdminHome></AdminHome>
-    </div>
-
+  path: "/dashboard/donor",
+  element: <PrivateRoute><Donor /></PrivateRoute>,
+  children: [
+    {
+      index: true,
+      path: "/dashboard/donor",
+      element: <PrivateRoute><DonorHome /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/donor/create-donation-request",
+      element: <PrivateRoute><CreateReq /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/donor/my-donation-requests",
+      element: <PrivateRoute><BloodReq /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/donor/profile",
+      element: <PrivateRoute><Profile /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/donor/view/:id",
+      element: <PrivateRoute><Details /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/donor/edit/:id",
+      element: <PrivateRoute><Edit /></PrivateRoute>
+    },
+  ]
 },
 {
-path:"/dashboard/Admin/Allusers",
-element: <AllUsers></AllUsers>
-
-}, 
+  path: "/dashboard/Volunteer",
+  element: <PrivateRoute><Volunteer /></PrivateRoute>,
+  children: [
+    {
+      index: true,
+      path: "/dashboard/Volunteer",
+      element: <PrivateRoute><div><DashboardStats /><VolunteerHome /></div></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Volunteer/All-donation-requests",
+      element: <PrivateRoute><AllReq /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Volunteer/create-donation-request",
+      element: <PrivateRoute><CreateReq /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Volunteer/profile",
+      element: <PrivateRoute><Profile /></PrivateRoute>
+    },
+  ]
+},
 {
-path:"/dashboard/Admin/create-donation-request",
-element:<CreateReq></CreateReq>
-      },
-{
-path:"/dashboard/Admin/All-donation-requests",
-element:<AllReq></AllReq>
-      },
-{
-path:"/dashboard/Admin/profile",
-element:<Profile></Profile>
-      },
-       {
-path:"/dashboard/Admin/view/:id",
-element:<Details></Details>
-      },
-      {
-path:"/dashboard/Admin/edit/:id",
-element:<Edit></Edit>
-      },
+  path: "/dashboard/Admin",
+  element: <PrivateRoute><Admin /></PrivateRoute>,
+  children: [
+    {
+      index: true,
+      path: "/dashboard/Admin",
+      element: <PrivateRoute><div><DashboardStats /><AdminHome /></div></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/Allusers",
+      element: <PrivateRoute><AllUsers /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/create-donation-request",
+      element: <PrivateRoute><CreateReq /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/All-donation-requests",
+      element: <PrivateRoute><AllReq /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/profile",
+      element: <PrivateRoute><Profile /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/view/:id",
+      element: <PrivateRoute><Details /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/edit/:id",
+      element: <PrivateRoute><Edit /></PrivateRoute>
+    },
+  ]
+},
+{path: "/*",
+            element: <Error></Error>
+        },
 
 
 
-    ]
-  },
+
 ]);
 
 export default Router
