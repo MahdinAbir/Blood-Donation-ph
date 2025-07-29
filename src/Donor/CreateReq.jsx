@@ -9,7 +9,7 @@ import Loader from '../Components/Loader';
 import { getIdToken } from 'firebase/auth';
 
 const CreateReq = () => {
-    const { user } = useContext(AuthContext);
+    const { user,mainProfileData } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [active, setActive] = useState(false);
 
@@ -120,7 +120,7 @@ const CreateReq = () => {
 
         // Build the request data object
         const ReqUserData = {
-            requesterName: user.displayName || '', // read-only from logged in user
+            requesterName: mainProfileData.name || '', // read-only from logged in user
             requesterEmail: user.email || '', // read-only from logged in user
             recipientName: recipientName.trim(),
             recipientDistrict: districtName,

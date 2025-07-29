@@ -10,7 +10,7 @@ import { getIdToken } from 'firebase/auth';
 import Loader from '../Components/Loader';
 
 const Profile = () => {
-    const { user } = useContext(AuthContext);
+    const { user, setMainProfileData } = useContext(AuthContext);
 
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -129,6 +129,7 @@ const Profile = () => {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setLoading(false);
+            setMainProfileData(payload);
             toast.success('Profile updated successfully!');
             setEditMode(false);
         } catch (err) {

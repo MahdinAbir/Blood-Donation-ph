@@ -17,6 +17,7 @@ import CreateReq from "../Donor/CreateReq";
 import Profile from "../DashBoardLayout/Profile";
 import DonorDetails from "../Donor/DonorDetails";
 import DonorEdit from "../Donor/DonorEdit";
+import AllUsers from "../Admin/AllUsers";
 
 const Router = createBrowserRouter([
   {
@@ -100,7 +101,24 @@ element:<DonorEdit></DonorEdit>
   },
   {
     path: "/dashboard/admin",
-    element: <Admin></Admin>
+    element: <Admin></Admin>,
+    children: [
+
+
+{
+  index:true,
+  path:"/dashboard/admin",
+  element: <Admin></Admin>
+
+},
+{
+path:"/dashboard/admin/Allusers",
+element: <AllUsers></AllUsers>
+
+}
+
+
+    ]
   },
 ]);
 

@@ -69,6 +69,7 @@ const DonorHome = () => {
       fetchDonationRequests();
       toast.success("Status Updated!")
     } catch (err) {
+        toast.error("NOT UPDATED")
       console.error(err);
     }
   };

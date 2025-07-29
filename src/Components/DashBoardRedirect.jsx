@@ -28,10 +28,11 @@ const DashboardRedirect = () => {
         );
 
         const role = res.data[0].role;
+        console.log(role)
 console.log(role);
-        if (role === "admin") {
+        if (role === "Admin") {
           navigate("/dashboard/admin");
-        } else if (role === "volunteer") {
+        } else if (role === "Volunteer") {
           navigate("/dashboard/volunteer");
         } else if (role === "Donor") {
           navigate("/dashboard/donor");

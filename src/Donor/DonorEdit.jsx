@@ -6,6 +6,7 @@ import { AuthContext } from "../Authentication/AuthContext";
 
 import districts from "../assets/districts.json";
 import upazilas from "../assets/upazilas.json";
+import { toast } from "react-toastify";
 
 const DonorEdit = () => {
   const { id } = useParams();
@@ -76,8 +77,8 @@ const DonorEdit = () => {
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert("Request updated successfully!");
-      navigate(`/dashboard/view/${id}`);
+      toast.success("Request updated successfully!");
+      
     } catch (err) {
       setError("Failed to update request.");
     } finally {
