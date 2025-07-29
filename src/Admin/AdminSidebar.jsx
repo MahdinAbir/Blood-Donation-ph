@@ -18,9 +18,10 @@ const AdminSidebar = () => {
   // Centralized navigation items
   const navItems = [
     { to: '/dashboard/Admin', label: '🏠 Dashboard Home', end: true },
-    { to: '/dashboard/admin/Allusers', label: '➕ All Users' },
-    { to: '/dashboard/donor/my-donation-requests', label: '📄 My Requests' },
-    { to: '/dashboard/donor/profile', label: 'My Profile' },
+    { to: '/dashboard/Admin/Allusers', label: ' All Users' },
+    { to: '/dashboard/Admin/create-donation-request', label: '➕ Create Request' },
+    { to: '/dashboard/Admin/my-donation-requests', label: '📄 My Requests' },
+    { to: '/dashboard/Admin/profile', label: 'My Profile' },
   ];
 
   return (

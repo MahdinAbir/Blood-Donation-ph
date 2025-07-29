@@ -4,7 +4,7 @@ import { getIdToken } from "firebase/auth";
 import { AuthContext } from "../Authentication/AuthContext";
 import { useParams } from "react-router";
 
-const DonorDetails = () => {
+const Details = () => {
     const {id}= useParams();
   const { user } = useContext(AuthContext);
   const [donor, setDonor] = useState(null);
@@ -111,4 +111,4 @@ const InfoItem = ({ label, value, valueClassName = "" }) => (
   </div>
 );
 
-export default DonorDetails;
+export default Details;

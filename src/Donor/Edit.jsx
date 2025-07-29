@@ -8,10 +8,10 @@ import districts from "../assets/districts.json";
 import upazilas from "../assets/upazilas.json";
 import { toast } from "react-toastify";
 
-const DonorEdit = () => {
+const Edit = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+ 
 
   const [formData, setFormData] = useState({});
   const [selectedDistrict, setSelectedDistrict] = useState("");
@@ -167,4 +167,4 @@ const EditableInput = ({ label, name, value, onChange, type = "text" }) => (
   </div>
 );
 
-export default DonorEdit;
+export default Edit;
