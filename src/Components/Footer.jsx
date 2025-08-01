@@ -6,15 +6,15 @@ const Footer = () => {
     <footer className="bg-[#EAEBD0] text-[#2f2f2f] py-10 border-t border-[#DA6C6C]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        {/* Brand Section */}
+        
         <div>
-          <h2 className="text-2xl font-bold mb-2 text-[#AF3E3E]">BloodAid</h2>
+          <h2 className="text-2xl font-bold mb-2 text-[#AF3E3E]">LifeDrop</h2>
           <p className="text-sm max-w-xs">
             Connecting lives through timely blood donation and compassion.
           </p>
         </div>
 
-        {/* Useful Links */}
+       
         <div>
           <h3 className="text-lg font-semibold mb-3 text-[#AF3E3E]">Useful Links</h3>
           <ul className="space-y-2 text-[#2f2f2f]">
@@ -82,7 +82,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-10 text-center text-sm text-[#2f2f2f]">
-        &copy; {new Date().getFullYear()} BloodAid. All rights reserved.
+        &copy; {new Date().getFullYear()} Lifedrop. All rights reserved.
       </div>
     </footer>
   );
