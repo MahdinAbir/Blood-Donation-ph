@@ -19,7 +19,7 @@ const DashboardRedirect = () => {
         const token = await getIdToken(user);
 
         const res = await axios.get(
-          `http://localhost:3000/Allusers/${user.email}`,
+          `https://lifedrop-server-pi.vercel.app/Allusers/${user.email}`,
           {
             headers: {
               Authorization: `Bearer ${token}`

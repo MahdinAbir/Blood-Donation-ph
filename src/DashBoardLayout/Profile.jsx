@@ -39,7 +39,7 @@ const Profile = () => {
                 setLoading(true);
                 const token = await getIdToken(user);
 
-                const res = await axios.get(`http://localhost:3000/Allusers/${user.email}`, {
+                const res = await axios.get(`https://lifedrop-server-pi.vercel.app/Allusers/${user.email}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const data = res.data[0];
@@ -125,7 +125,7 @@ const Profile = () => {
             setLoading(true);
             const token = await getIdToken(user)
 
-            await axios.patch(`http://localhost:3000/Allusers/${user.email}`, payload, {
+            await axios.patch(`https://lifedrop-server-pi.vercel.app/Allusers/${user.email}`, payload, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setLoading(false);

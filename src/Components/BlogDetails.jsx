@@ -8,7 +8,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/blogs/published/${id}`)
+      .get(`https://lifedrop-server-pi.vercel.app/blogs/published/${id}`)
       .then((res) => setBlog(res.data))
       .catch(() => console.error("Failed to fetch blog details"));
   }, [id]);

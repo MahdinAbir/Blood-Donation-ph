@@ -15,7 +15,7 @@ const Details = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:3000/Recipients/${id}`, { donationStatus: newStatus });
+      await axios.patch(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`, { donationStatus: newStatus });
       toast.success("Status Updated!");
     } catch (err) {
       toast.error("NOT UPDATED");
@@ -31,7 +31,7 @@ const Details = () => {
       setError(null);
       try {
         const token = await getIdToken(user);
-        const res = await axios.get(`http://localhost:3000/Recipients/${id}`, {
+        const res = await axios.get(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

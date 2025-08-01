@@ -22,7 +22,7 @@ const AllReq = () => {
     const fetchAllRequests = async () => {
       const token = await getIdToken(user)
       try {
-        const res = await axios.get('http://localhost:3000/Recipients' 
+        const res = await axios.get('https://lifedrop-server-pi.vercel.app/Recipients' 
 
           ,  {
         headers: { Authorization: `Bearer ${token}` },
@@ -67,7 +67,7 @@ const AllReq = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/Recipients/${id}`,
+        await axios.delete(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`,
 
            {
         headers: { Authorization: `Bearer ${token}` },
@@ -85,7 +85,7 @@ const AllReq = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:3000/Recipients/${id}`, { donationStatus: newStatus });
+      await axios.patch(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`, { donationStatus: newStatus });
       setAllRequests(prev =>
         prev.map(req => (req._id === id ? { ...req, donationStatus: newStatus } : req))
       );

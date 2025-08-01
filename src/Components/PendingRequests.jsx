@@ -15,7 +15,7 @@ const PendingRequests = () => {
     const fetchPendingRequests = async () => {
       setLoading(true)
       try {
-        const res = await axios.get('http://localhost:3000/Recipients');
+        const res = await axios.get('https://lifedrop-server-pi.vercel.app/Recipients');
         const pending = res.data.filter((req) => req.donationStatus === 'pending');
         setRequests(pending);
         setLoading(false)

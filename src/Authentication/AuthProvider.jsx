@@ -74,7 +74,7 @@ useEffect(() => {
 
       const token = await getIdToken(user); 
 
-      const res = await axios.get(`http://localhost:3000/Allusers/${user.email}`, {
+      const res = await axios.get(`https://lifedrop-server-pi.vercel.app/Allusers/${user.email}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

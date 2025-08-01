@@ -17,7 +17,7 @@ const AllBlogs = () => {
     const fetchBlogs = async () => {
       try {
         const token = await getIdToken(user); 
-        const res = await axios.get("http://localhost:3000/blogs", {
+        const res = await axios.get("https://lifedrop-server-pi.vercel.app/blogs", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,7 +38,7 @@ const handlePublishToggle = async (id, status) => {
     try {
       const token = await getIdToken(user); 
       await axios.patch(
-        `http://localhost:3000/Blogs/${id}`,
+        `https://lifedrop-server-pi.vercel.app/Blogs/${id}`,
         { status: newStatus },
         {
           headers: {
@@ -61,7 +61,7 @@ const handlePublishToggle = async (id, status) => {
   const handleDelete = async (id) => {
     try {
       const token = await getIdToken(user); 
-      await axios.delete(`http://localhost:3000/Blogs/${id}`, {
+      await axios.delete(`https://lifedrop-server-pi.vercel.app/Blogs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

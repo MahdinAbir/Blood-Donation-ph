@@ -18,7 +18,7 @@ const BloodReq = () => {
             try {
                 const token = await getIdToken(user);
                 const res = await axios.get(
-                    `http://localhost:3000/Recipients/email/${user.email}`,
+                    `https://lifedrop-server-pi.vercel.app/Recipients/email/${user.email}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

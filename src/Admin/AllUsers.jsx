@@ -23,7 +23,7 @@ const AllUsers = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/AllUsers");
+      const res = await axios.get("https://lifedrop-server-pi.vercel.app/AllUsers");
       setUsers(res.data);
     } catch (error) {
       toast.error("Failed to fetch users");
@@ -35,7 +35,7 @@ const AllUsers = () => {
     try {
       const token = await getIdToken(user);
       await axios.patch(
-        `http://localhost:3000/AllUsers/role/${id}`,
+        `https://lifedrop-server-pi.vercel.app/AllUsers/role/${id}`,
         { role: newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -51,7 +51,7 @@ const AllUsers = () => {
     try {
       const token = await getIdToken(user);
       await axios.patch(
-        `http://localhost:3000/AllUsers/role/${id}`,
+        `https://lifedrop-server-pi.vercel.app/AllUsers/role/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

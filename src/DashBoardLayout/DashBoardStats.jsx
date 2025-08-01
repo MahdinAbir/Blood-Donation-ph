@@ -9,14 +9,14 @@ const DashboardStats = () => {
 
   // Fetch Donors
   useEffect(() => {
-    axios.get('http://localhost:3000/AllUsers') // replace with your endpoint
+    axios.get('https://lifedrop-server-pi.vercel.app/AllUsers') // replace with your endpoint
       .then(res => setTotalUsers(res.data.length))
       .catch(err => console.error(err));
   }, []);
 
   // Fetch Requests
   useEffect(() => {
-    axios.get('http://localhost:3000/Recipients') // replace with your endpoint
+    axios.get('https://lifedrop-server-pi.vercel.app/Recipients') // replace with your endpoint
       .then(res => setTotalRequests(res.data.length))
       .catch(err => console.error(err));
   }, []);

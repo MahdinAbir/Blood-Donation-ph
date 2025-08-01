@@ -44,7 +44,7 @@ const CreateReq = () => {
                     const token = await getIdToken(user);
 
                     const res = await axios.get(
-                        `http://localhost:3000/Allusers/${user.email}`,
+                        `https://lifedrop-server-pi.vercel.app/Allusers/${user.email}`,
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`
@@ -140,7 +140,7 @@ const CreateReq = () => {
             // Post to your API (adjust URL)
             const token = await getIdToken(user);
             const res = await axios.post(
-                'http://localhost:3000/Recipients',
+                'https://lifedrop-server-pi.vercel.app/Recipients',
                 ReqUserData,
                 {
                     headers: { Authorization: `Bearer ${token}` },

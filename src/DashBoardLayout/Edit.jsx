@@ -27,7 +27,7 @@ const Edit = () => {
       setLoading(true);
       try {
         const token = await getIdToken(user);
-        const res = await axios.get(`http://localhost:3000/Recipients/${id}`, {
+        const res = await axios.get(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(res.data);
@@ -73,7 +73,7 @@ const Edit = () => {
     try {
       const token = await getIdToken(user);
       await axios.patch(
-        `http://localhost:3000/Recipients/${id}`,
+        `https://lifedrop-server-pi.vercel.app/Recipients/${id}`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

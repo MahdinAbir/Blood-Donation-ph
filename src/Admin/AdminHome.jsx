@@ -18,7 +18,7 @@ const AdminHome = () => {
       if (!user) return; // safety check
       const token = await getIdToken(user, true); // force token refresh
 
-      const res = await axios.get(`http://localhost:3000/Recipients/email/${user.email}`, {
+      const res = await axios.get(`https://lifedrop-server-pi.vercel.app/Recipients/email/${user.email}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -53,7 +53,7 @@ const AdminHome = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/Recipients/${id}`, {
+        await axios.delete(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         fetchDonationRequests();
@@ -69,7 +69,7 @@ const AdminHome = () => {
     if (!user) return;
     try {
       const token = await getIdToken(user, true); // force refresh token
-      await axios.patch(`http://localhost:3000/Recipients/${id}`, 
+      await axios.patch(`https://lifedrop-server-pi.vercel.app/Recipients/${id}`, 
         { donationStatus: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

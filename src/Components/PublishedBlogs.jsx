@@ -10,7 +10,7 @@ const PublishedBlogs = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get("http://localhost:3000/blogs/published") // Already filtered from backend
+      .get("https://lifedrop-server-pi.vercel.app/blogs/published") // Already filtered from backend
       .then((res) => {
         setBlogs(res.data);
         setLoading(false)

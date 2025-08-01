@@ -68,7 +68,7 @@ const Search = () => {
     setLoading(true);
 
     try {
-      const res = await axios.get("http://localhost:3000/donors"); // Replace with your API URL
+      const res = await axios.get("https://lifedrop-server-pi.vercel.app/donors"); // Replace with your API URL
       const allDonors = res.data;
 
       const filtered = allDonors.filter((donor) => {

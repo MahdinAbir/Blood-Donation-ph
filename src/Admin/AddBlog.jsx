@@ -61,7 +61,7 @@ const AddBlog = () => {
       };
 const token = getIdToken(user)
        const res = await axios.post(
-      'http://localhost:3000/Blogs', 
+      'https://lifedrop-server-pi.vercel.app/Blogs', 
       blogData,
       {
         headers: { Authorization: `Bearer ${token}` },

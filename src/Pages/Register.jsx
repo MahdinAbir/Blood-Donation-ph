@@ -13,10 +13,14 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [filteredUpazilas, setFilteredUpazilas] = useState([]);
-  const [districtName , setdistrictName]= useState("")
+  const [districtName, setdistrictName] = useState('');
+  
+  const [imageUrl, setImageUrl] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [fileName, setFileName] = useState('');
 
   const navigate = useNavigate();
-  const { registerWithEmail,  updateUser, user } = useContext(AuthContext);
+  const { registerWithEmail, updateUser, user } = useContext(AuthContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,19 +28,13 @@ const Register = () => {
 
   const handleDistrictChange = (e) => {
     setSelectedDistrict(e.target.value);
-    const value = e.target.value
-     const district = districts[2].data.find(
-    (d) => d.id == value 
-     );
-     setdistrictName(district.name)
-
-
-
+    const value = e.target.value;
+    const district = districts[2].data.find((d) => d.id == value);
+    setdistrictName(district.name);
   };
 
   useEffect(() => {
     if (selectedDistrict) {
-
       const filtered = upazilas[2].data.filter(
         (u) => u.district_id === selectedDistrict
       );
@@ -46,6 +44,29 @@ const Register = () => {
     }
   }, [selectedDistrict]);
 
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    setFileName(file.name);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_KEY}`,
+        formData
+      );
+      setImageUrl(res.data.data.url);
+      toast.success("Image uploaded successfully!");
+    } catch (error) {
+      toast.error("Image upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -53,9 +74,7 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const blood = form.blood.value;
-    
     const upazilaName = form.upazila.value;
-    const image = form.image.value;
 
     if (password.length < 6) {
       setPasswordError('Password must be at least 6 characters long.');
@@ -69,17 +88,20 @@ const Register = () => {
       setPasswordError('Password must include at least one lowercase letter.');
       return;
     }
+    if (!imageUrl) {
+      toast.error('Please upload a profile picture.');
+      return;
+    }
     setPasswordError('');
 
     try {
       await registerWithEmail(email, password);
-      await updateUser({ displayName: name, photoURL: image });
+      await updateUser({ displayName: name, photoURL: imageUrl });
 
-      // ✅ Construct the userData object for MongoDB
       const userData = {
         name,
         email,
-        photoURL: image,
+        photoURL: imageUrl,
         bloodGroup: blood,
         district: districtName,
         upazila: upazilaName,
@@ -88,16 +110,7 @@ const Register = () => {
         createdAt: new Date()
       };
 
-      console.log("User Data to send to MongoDB:", userData);
-
-     
-
-      axios.post( 'http://localhost:3000/AllUsers',
-       {userData}
-      ).then( (res)=>{console.log(res)}).catch((err) =>{toast.error(err)} )
-
-
-
+      await axios.post('https://lifedrop-server-pi.vercel.app/AllUsers', { userData });
       toast.success('Registered successfully!');
       setTimeout(() => navigate('/'), 1000);
     } catch (err) {
@@ -105,15 +118,13 @@ const Register = () => {
     }
   };
 
- 
-
   if (user) return <p className="text-center py-10 text-xl text-green-600">You're already logged in.</p>;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#EAEBD0] px-4">
-      <div className="flex flex-col lg:flex-row w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden mt-20 ">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden mt-20">
         {/* Left Side */}
-        <div className="w-full lg:w-1/2 bg-[#FFF2EB] flex flex-col items-center justify-center  p-10">
+        <div className="w-full lg:w-1/2 bg-[#FFF2EB] flex flex-col items-center justify-center p-10">
           <h2 className="text-3xl font-bold text-[#AF3E3E] mb-2">Sign Up & Save Lives!</h2>
           <p className="text-[#511D43] text-center max-w-xs">
             Register to donate blood, help others, and spread kindness.
@@ -161,9 +172,22 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Profile Picture</label>
-              <input placeholder="Upload Profile Picture Image URL" type="url" name="image" required className="w-full px-2 py-1 border rounded-sm border-gray-300 text-gray-800" />
-            </div>
+  <label className="block text-gray-700 mb-1">Profile Picture</label>
+  <div className="bg-[#FFE8CD] border border-dashed border-[#CD5656] rounded-md p-4">
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleImageChange}
+      className="block w-full text-sm text-gray-800"
+    />
+    {fileName && (
+      <p className="text-sm text-gray-700 mt-2">
+        Selected: <span className="italic">{fileName}</span> {uploading && ' (Uploading...)'}
+      </p>
+    )}
+  </div>
+</div>
+
 
             <div>
               <label className="block text-gray-700 mb-1">Blood Group</label>
@@ -204,12 +228,14 @@ const Register = () => {
               </select>
             </div>
 
-            <button type="submit" className="w-full bg-[#CD5656] hover:bg-[#AF3E3E] text-white py-2 rounded-md font-semibold transition">
-              Sign Up
+            <button
+              type="submit"
+              disabled={uploading}
+              className="w-full bg-[#CD5656] hover:bg-[#AF3E3E] text-white py-2 rounded-md font-semibold transition disabled:opacity-60"
+            >
+              {uploading ? 'Uploading Image...' : 'Sign Up'}
             </button>
           </form>
-
-         
 
           <p className="text-center text-gray-600 text-sm mt-4">
             Already have an account? <Link to="/auth/login" className="text-[#DC2525] hover:underline font-medium">Login</Link>
