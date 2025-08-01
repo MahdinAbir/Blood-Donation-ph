@@ -14,33 +14,33 @@ const AdminHome = () => {
 
   const fetchDonationRequests = async () => {
     try {
-        setLoading(true);
-        const  token = await getIdToken(user);
+      setLoading(true);
+      if (!user) return; // safety check
+      const token = await getIdToken(user, true); // force token refresh
 
-      const res = await axios.get(`http://localhost:3000/Recipients/email/${user.email}`,
+      const res = await axios.get(`http://localhost:3000/Recipients/email/${user.email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-        {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-
-        );
-      const sorted = res.data
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setRequests(sorted.slice(0, 3));
     } catch (err) {
       console.error(err);
+      toast.error("Failed to fetch donation requests");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchDonationRequests();
+    if (user) fetchDonationRequests();
   }, [user]);
 
   const handleDelete = async (id) => {
+    if (!user) return;
+    const token = await getIdToken(user, true); 
     const confirm = await Swal.fire({
       title: "Are you sure?",
       text: "This request will be permanently deleted.",
@@ -53,7 +53,9 @@ const AdminHome = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/Recipients/${id}`);
+        await axios.delete(`http://localhost:3000/Recipients/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         fetchDonationRequests();
         Swal.fire("Deleted!", "The request has been deleted.", "success");
       } catch (err) {
@@ -64,32 +66,25 @@ const AdminHome = () => {
   };
 
   const handleStatusUpdate = async (id, newStatus) => {
+    if (!user) return;
     try {
-      await axios.patch(`http://localhost:3000/Recipients/${id}`, { donationStatus: newStatus });
+      const token = await getIdToken(user, true); // force refresh token
+      await axios.patch(`http://localhost:3000/Recipients/${id}`, 
+        { donationStatus: newStatus },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       fetchDonationRequests();
-      toast.success("Status Updated!")
+      toast.success("Status Updated!");
     } catch (err) {
-        toast.error("NOT UPDATED")
+      toast.error("NOT UPDATED");
       console.error(err);
     }
   };
-
-
-
-
-
-
-
-
-
-
 
   if (loading) return <Loader />;
 
   return (
     <div className="p-6">
-      
-
       {requests.length > 0 && (
         <>
           <h2 className="text-3xl mt-10 font-bold mb-6 text-[#AF3E3E]">Your Recent Donation Requests</h2>

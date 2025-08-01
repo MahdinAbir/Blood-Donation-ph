@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 import { HiDotsVertical, HiOutlineAdjustments } from 'react-icons/hi';
 import { AuthContext } from '../Authentication/AuthContext';
+import { getIdToken } from 'firebase/auth';
 
 const AllReq = () => {
   const [allRequests, setAllRequests] = useState([]);
@@ -13,13 +14,21 @@ const AllReq = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const navigate = useNavigate();
-  const { mainProfileData } = useContext(AuthContext);
+  const { mainProfileData,user } = useContext(AuthContext);
+   
   console.log(mainProfileData);
 
   useEffect(() => {
     const fetchAllRequests = async () => {
+      const token = await getIdToken(user)
       try {
-        const res = await axios.get('http://localhost:3000/Recipients');
+        const res = await axios.get('http://localhost:3000/Recipients' 
+
+          ,  {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+
+        );
         setAllRequests(res.data);
       } catch (err) {
         console.error(err);
@@ -45,6 +54,7 @@ const AllReq = () => {
   const currentItems = filteredRequests.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleDelete = async (id) => {
+    const token = await getIdToken(user); 
     const confirm = await Swal.fire({
       title: 'Are you sure?',
       text: 'This request will be permanently deleted.',
@@ -57,7 +67,13 @@ const AllReq = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/Recipients/${id}`);
+        await axios.delete(`http://localhost:3000/Recipients/${id}`,
+
+           {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+
+         );
         setAllRequests(prev => prev.filter(req => req._id !== id));
         Swal.fire('Deleted!', 'The request has been deleted.', 'success');
       } catch (err) {
