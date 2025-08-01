@@ -39,7 +39,29 @@ const Home = () => {
           className="flex-1"
         >
           <div className="w-full md:max-w-md max-w-sm h-64 bg-gray-300 rounded-xl mx-auto flex items-center justify-center">
-            <p className="text-gray-600 text-center"> <img src="https://i.ibb.co/7xhQ0xD2/premium-photo-1682309704250-6bac0f499665-w-600-auto-format-fit-crop-q-60-ixlib-rb-4-1.jpg" alt="" /> </p>
+            <p className="text-gray-600 text-center"> 
+              
+              
+              
+              
+               <motion.img
+  src="https://i.ibb.co/7xhQ0xD2/premium-photo-1682309704250-6bac0f499665-w-600-auto-format-fit-crop-q-60-ixlib-rb-4-1.jpg"
+  alt="Food Sharing Illustration"
+  className="w-full   md:max-w-md max-w-sm mx-auto"
+  animate={{
+    y: [0, -10, 0], // 
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    repeatType: "loop",
+    ease: "easeInOut",
+  }}
+/>
+              
+
+
+              </p>
           </div>
         </motion.div>
       </section>
