@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
+import Loader from "./Loader";
 
 const PublishedBlogs = () => {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    
+    setLoading(true)
     axios
       .get("http://localhost:3000/blogs/published") // Already filtered from backend
       .then((res) => {
         setBlogs(res.data);
+        setLoading(false)
       })
       .catch(() => {
         console.error("Failed to fetch blogs");
       });
   }, []);
+
+    if(loading)
+    return (<Loader></Loader>  )
+
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-10">

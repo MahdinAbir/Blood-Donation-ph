@@ -19,7 +19,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3 text-[#AF3E3E]">Useful Links</h3>
           <ul className="space-y-2 text-[#2f2f2f]">
             <li>
-              <NavLink
+              <NavLink to={"/auth/terms"}
                
                 className="hover:text-[#DA6C6C] transition-colors duration-300"
               >
@@ -27,7 +27,7 @@ const Footer = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
+              <NavLink to={"/auth/privacy"}
                 
                 className="hover:text-[#DA6C6C] transition-colors duration-300"
               >

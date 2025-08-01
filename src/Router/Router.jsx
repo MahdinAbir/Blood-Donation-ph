@@ -33,6 +33,9 @@ import AddBlog from "../Admin/AddBlog";
 import AllBlogs from "../Admin/AllBlogs";
 import BlogDetails from "../Components/BlogDetails";
 import PublishedBlogs from "../Components/PublishedBlogs";
+import Search from "../Components/Search";
+import Privacy from "../Components/Privacy";
+import TermsAndConditions from "../Components/TermsAndConditions";
 
 
 
@@ -76,6 +79,18 @@ const Router = createBrowserRouter([
   {
     path: "/auth/fund",
     element: <PrivateRoute> <Fund></Fund> </PrivateRoute>
+  },
+  {
+    path: "/auth/search",
+    element: <Search></Search>
+  },
+  {
+    path: "/auth/privacy",
+    element: <Privacy></Privacy>
+  },
+  {
+    path: "/auth/terms",
+    element: <TermsAndConditions></TermsAndConditions>
   },
 
 

@@ -25,9 +25,9 @@ const Home = () => {
             <Link to="/auth/register" className="btn bg-[#DA6C6C] hover:bg-[#CD5656] border-none text-white font-semibold">
               Join as a Donor
             </Link>
-            {/* <Link to="/search" className="btn bg-white hover:bg-[#FFD6BA] border border-[#CD5656] text-[#AF3E3E] font-semibold">
+            <Link to="/auth/search" className="btn bg-white hover:bg-[#FFD6BA] border border-[#CD5656] text-[#AF3E3E] font-semibold">
               Search Donors
-            </Link> */}
+            </Link>
           </div>
         </motion.div>
 

@@ -3,17 +3,22 @@ import axios from 'axios';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../Authentication/AuthContext';
+import Loader from './Loader';
+
 
 const PendingRequests = () => {
   const [requests, setRequests] = useState([]);
   const { mainProfileData } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPendingRequests = async () => {
+      setLoading(true)
       try {
         const res = await axios.get('http://localhost:3000/Recipients');
         const pending = res.data.filter((req) => req.donationStatus === 'pending');
         setRequests(pending);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching pending requests:', error);
       }
@@ -28,6 +33,10 @@ const PendingRequests = () => {
     const role = mainProfileData.role.toLowerCase();
     return `/dashboard/${role}/view/${id}`;
   };
+
+
+  if(loading)
+    return (<Loader></Loader>  )
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
