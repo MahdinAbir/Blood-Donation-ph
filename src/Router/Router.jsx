@@ -29,6 +29,9 @@ import PrivateRoute from "./PrivateRoute";
 import Blog from "../Components/Blog";
 import Fund from "../Components/Fund";
 import Error from "../Pages/Error";
+import AddBlog from "../Admin/AddBlog";
+import AllBlogs from "../Admin/AllBlogs";
+
 
 
 const Router = createBrowserRouter([
@@ -163,6 +166,14 @@ const Router = createBrowserRouter([
     {
       path: "/dashboard/Admin/profile",
       element: <PrivateRoute><Profile /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/addblog",
+      element: <PrivateRoute>  <AddBlog></AddBlog>  </PrivateRoute>
+    },
+    {
+      path: "/dashboard/Admin/allblog",
+      element: <PrivateRoute>  <AllBlogs></AllBlogs>  </PrivateRoute>
     },
     {
       path: "/dashboard/Admin/view/:id",
