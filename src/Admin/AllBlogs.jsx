@@ -3,42 +3,72 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Authentication/AuthContext";
 import { NavLink } from "react-router";
+import { getIdToken } from "firebase/auth";
 
 const AllBlogs = () => {
-  const { mainProfileData } = useContext(AuthContext);
+  const { mainProfileData,user } = useContext(AuthContext);
   const [blogs, setBlogs] = useState([]);
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 5;
+  
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/blogs")
-      .then((res) => setBlogs(res.data))
-      .catch(() => toast.error("Failed to fetch blogs"));
-  }, []);
+   useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const token = await getIdToken(user); 
+        const res = await axios.get("http://localhost:3000/blogs", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setBlogs(res.data);
+      } catch (err) {
+        toast.error("Failed to fetch blogs");
+      }
+    };
 
-  const handlePublishToggle = async (id, status) => {
+    if (user) {
+      fetchBlogs();
+    }
+  }, [user]);
+
+const handlePublishToggle = async (id, status) => {
     const newStatus = status === "draft" ? "published" : "draft";
     try {
-      await axios.patch(`http://localhost:3000/Blogs/${id}`, {
-        status: newStatus,
-      });
-      toast.success(`Blog ${newStatus === "published" ? "published" : "unpublished"}`);
+      const token = await getIdToken(user); 
+      await axios.patch(
+        `http://localhost:3000/Blogs/${id}`,
+        { status: newStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(
+        `Blog ${newStatus === "published" ? "published" : "unpublished"}`
+      );
       setBlogs((prev) =>
         prev.map((b) => (b._id === id ? { ...b, status: newStatus } : b))
       );
-    } catch {
+    } catch (error) {
       toast.error("Failed to update blog status");
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/Blogs/${id}`);
+      const token = await getIdToken(user); 
+      await axios.delete(`http://localhost:3000/Blogs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Blog deleted");
       setBlogs((prev) => prev.filter((b) => b._id !== id));
-    } catch {
+    } catch (error) {
       toast.error("Failed to delete blog");
     }
   };
