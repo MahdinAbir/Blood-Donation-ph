@@ -26,7 +26,7 @@ const GlassNavbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/auth/blog" className={linkHoverStyle}>
+        <NavLink to="/auth/blogs" className={linkHoverStyle}>
           Blog
         </NavLink>
       </li>

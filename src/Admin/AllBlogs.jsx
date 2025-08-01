@@ -55,7 +55,7 @@ const AllBlogs = () => {
      <div className="flex justify-between
      " >
  <h1 className="text-3xl font-bold mb-6">All Blog Posts</h1>
- <NavLink to={"/dashboard/Admin/addblog"}  >   <button className="text-3xl btn bg-lime-300 rounded-2xl px-5 py-4  text-blue-600 font-bold mb-6" >     Create Blog         </button>            </NavLink>
+ <NavLink to={"/dashboard/Admin/content-management/addblog"}  >   <button className="text-3xl btn bg-lime-300 rounded-2xl px-5 py-4  text-blue-600 font-bold mb-6" >     Create Blog         </button>            </NavLink>
 
      </div>
 

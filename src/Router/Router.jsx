@@ -31,6 +31,8 @@ import Fund from "../Components/Fund";
 import Error from "../Pages/Error";
 import AddBlog from "../Admin/AddBlog";
 import AllBlogs from "../Admin/AllBlogs";
+import BlogDetails from "../Components/BlogDetails";
+import PublishedBlogs from "../Components/PublishedBlogs";
 
 
 
@@ -64,8 +66,12 @@ const Router = createBrowserRouter([
     element: <PendingRequests></PendingRequests>
   },
   {
-    path: "/auth/blog",
-    element: <Blog></Blog>
+    path: "/auth/blogs",
+    element: <PublishedBlogs></PublishedBlogs>
+  },
+  {
+    path: "/auth/blogs/:id",
+    element: <BlogDetails></BlogDetails>
   },
   {
     path: "/auth/fund",
@@ -168,11 +174,11 @@ const Router = createBrowserRouter([
       element: <PrivateRoute><Profile /></PrivateRoute>
     },
     {
-      path: "/dashboard/Admin/addblog",
+      path: "/dashboard/Admin/content-management/addblog",
       element: <PrivateRoute>  <AddBlog></AddBlog>  </PrivateRoute>
     },
     {
-      path: "/dashboard/Admin/allblog",
+      path: "/dashboard/Admin/content-management/allblog",
       element: <PrivateRoute>  <AllBlogs></AllBlogs>  </PrivateRoute>
     },
     {

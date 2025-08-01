@@ -21,7 +21,7 @@ const AdminSidebar = () => {
     { to: '/dashboard/Admin/Allusers', label: '👥  All Users' },
     { to: '/dashboard/Admin/create-donation-request', label: '➕ Create Request' },
     { to: '/dashboard/Admin/All-donation-requests', label: '📄 All Requests' },
-    { to: '/dashboard/Admin/content-management', label: '🛠️ Content Management' },
+    { to: '/dashboard/Admin/content-management/allblog', label: '🛠️ Content Management' },
     { to: '/dashboard/Admin/profile', label: '👤 My Profile' },
     
   ];

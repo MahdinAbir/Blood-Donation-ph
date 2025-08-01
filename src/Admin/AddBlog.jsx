@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getIdToken } from "firebase/auth";
 import Loader from "../Components/Loader";
+import { NavLink } from "react-router";
 
 const AddBlog = () => {
   const editor = useRef(null);
@@ -147,6 +148,9 @@ const token = getIdToken(user)
           {loading ? "Creating..." : "Create Blog"}
         </button>
       </form>
+
+<NavLink to={"/dashboard/Admin/content-management/allblog"}  >   <button className="text-xl btn bg-lime-300 rounded-2xl px-5 py-4  text-blue-600 font-bold my-10  " >     See ALL Blogs         </button>            </NavLink>
+
     </div>
   );
 };
