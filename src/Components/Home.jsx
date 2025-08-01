@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router"; // Ensure you're using react-router-dom
 import { FaHeartbeat, FaTint, FaHandHoldingHeart, FaShieldAlt, FaPlusCircle, FaUserNurse } from "react-icons/fa";
+import BannerSlider from "./BannerSlider";
 
 const Home = () => {
   return (
@@ -65,6 +66,8 @@ const Home = () => {
           </div>
         </motion.div>
       </section>
+
+      <BannerSlider></BannerSlider>
 
       {/* Featured Section */}
       <section className="px-6 md:px-20 py-16 bg-[#FFF2EB]">
