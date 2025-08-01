@@ -2,11 +2,13 @@ import React, { useState, useRef, useContext } from "react";
 import JoditEditor from "jodit-react";
 import axios from "axios";
 import { AuthContext } from "../Authentication/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+
 import { getIdToken } from "firebase/auth";
 import Loader from "../Components/Loader";
 import { NavLink } from "react-router";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const AddBlog = () => {
   const editor = useRef(null);
@@ -28,7 +30,12 @@ const AddBlog = () => {
     e.preventDefault();
 
     if (!title.trim() || !thumbnailFile || !content.trim()) {
-      toast.error("Please fill out all fields.");
+      Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Please fill out all fields.',
+});
+
       return;
     }
 
@@ -60,15 +67,25 @@ const token = getIdToken(user)
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-
+console.log(res.data.insertedId)
       if (res.data.insertedId) {
-        toast.success("Blog created successfully!");
+        Swal.fire({
+  icon: 'success',
+  title: 'Success!',
+  text: 'Blog created successfully!',
+});
+
         setTitle("");
         setThumbnailFile(null);
         setThumbnailName("");
         setContent("");
       } else {
-        toast.error("Failed to create blog.");
+        Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Failed to create blog.',
+});
+
       }
     } catch (error) {
       console.error("Error creating blog:", error);
@@ -88,7 +105,7 @@ const token = getIdToken(user)
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow">
-      <ToastContainer />
+     
       <h2 className="text-2xl font-semibold mb-6">Add New Blog</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Title */}

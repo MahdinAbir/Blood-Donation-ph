@@ -11,7 +11,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider> <ToastContainer position='top-center' /> 
+    <AuthProvider>
+      
+      
+      
+      
+      
+      
+       <ToastContainer position='top-center' /> 
+
+
+
     
      <RouterProvider router={Router} > </RouterProvider> 
 

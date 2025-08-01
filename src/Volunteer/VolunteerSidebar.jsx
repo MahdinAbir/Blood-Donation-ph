@@ -21,7 +21,7 @@ const VolunteerSidebar = () => {
     
     { to: '/dashboard/Volunteer/create-donation-request', label: '➕ Create Request' },
     { to: '/dashboard/Volunteer/All-donation-requests', label: '📄 All Requests' },
-    { to: '/dashboard/Volunteer/Content-Management', label: ' Content Management' },
+    { to: '/dashboard/Volunteer/Content-Management/allblog', label: '🛠️ Content Management' },
     { to: '/dashboard/Volunteer/profile', label: '👤 My Profile' },
   ];
 

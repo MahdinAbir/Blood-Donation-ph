@@ -139,6 +139,15 @@ const Router = createBrowserRouter([
       element: <PrivateRoute><AllReq /></PrivateRoute>
     },
     {
+      path: "/dashboard/Volunteer/content-management/addblog",
+      element: <PrivateRoute>  <AddBlog></AddBlog>  </PrivateRoute>
+    },
+
+    {
+      path: "/dashboard/Volunteer/content-management/allblog",
+      element: <PrivateRoute>  <AllBlogs></AllBlogs>  </PrivateRoute>
+    },
+    {
       path: "/dashboard/Volunteer/create-donation-request",
       element: <PrivateRoute><CreateReq /></PrivateRoute>
     },

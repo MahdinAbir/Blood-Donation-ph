@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { getIdToken } from 'firebase/auth';
 import { AuthContext } from '../Authentication/AuthContext';
 import { FaEllipsisV } from 'react-icons/fa';
@@ -88,6 +88,7 @@ const AllUsers = () => {
 
   return (
     <div className="p-4">
+      
       <h2 className="text-2xl font-semibold mb-4">All Users</h2>
 
       {/* Filter */}
