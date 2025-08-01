@@ -170,6 +170,14 @@ const Router = createBrowserRouter([
       path: "/dashboard/Volunteer/profile",
       element: <PrivateRoute><Profile /></PrivateRoute>
     },
+    {
+      path: "/dashboard/Volunteer/view/:id",
+      element: <PrivateRoute><Details /></PrivateRoute>
+    },
+    {
+      path: "/dashboard/Volunteer/edit/:id",
+      element: <PrivateRoute><Edit /></PrivateRoute>
+    },
   ]
 },
 {
