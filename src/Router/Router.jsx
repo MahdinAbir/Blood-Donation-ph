@@ -36,6 +36,7 @@ import PublishedBlogs from "../Components/PublishedBlogs";
 import Search from "../Components/Search";
 import Privacy from "../Components/Privacy";
 import TermsAndConditions from "../Components/TermsAndConditions";
+import HomePage from "../Components/HomePage";
 
 
 
@@ -50,7 +51,7 @@ const Router = createBrowserRouter([
 
   index:true,
   path:"/",
-  element:<Home></Home>,
+  element:<HomePage></HomePage>,
 
 
 

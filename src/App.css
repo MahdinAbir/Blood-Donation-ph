@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+@layer utilities {
+  @keyframes shadowLoop {
+    0%   { box-shadow: 0 0 15px rgba(30, 64, 175, 0.9); }   /* deep blue */
+    25%  { box-shadow: 10px 0 15px rgba(30, 64, 175, 0.9); }
+    50%  { box-shadow: 0 10px 15px rgba(30, 64, 175, 0.9); }
+    75%  { box-shadow: -10px 0 15px rgba(30, 64, 175, 0.9); }
+    100% { box-shadow: 0 0 15px rgba(30, 64, 175, 0.9); }
+  }
+
+  .animate-shadowLoop {
+    animation: shadowLoop 3s linear infinite;
+  }
+}
